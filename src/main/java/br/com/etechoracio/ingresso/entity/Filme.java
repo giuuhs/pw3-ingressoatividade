@@ -6,6 +6,10 @@ import br.com.etechoracio.ingresso.enums.SimNaoEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.List;
+import java.util.ArrayList;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 import java.time.Duration;
 
@@ -15,6 +19,7 @@ import java.time.Duration;
 @Table(name = "TBL_FILME")
 public class Filme {
 
+    private static Object mappedBy ;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_FILME")
@@ -52,11 +57,10 @@ public class Filme {
     @Column(name = "NR_AVALIACAO")
     private Double avaliacao;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "CHK_EM_CARTAZ")
     private SimNaoEnum emCartaz;
 
-    @OneToMany(mappedBy) = "filme", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List(Sessao) sessoes = new ArrayList<>();
+    @OneToMany(mappedBy = "filme", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Sessao> sessoes = new ArrayList<>();
 
 }

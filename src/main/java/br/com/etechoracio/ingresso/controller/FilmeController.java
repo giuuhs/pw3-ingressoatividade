@@ -29,6 +29,11 @@ public class FilmeController {
     }
 
     @GetMapping("/{id}/com-sessoes")
+    public ResponseEntity<FilmeComSessaoDTO> getFilmeComSessoes() {
+        return getFilmeComSessoes(null);
+    }
+
+    @GetMapping("/{id}/com-sessoes")
     public ResponseEntity<FilmeComSessaoDTO> getFilmeComSessoes(@PathVariable Long id) {
         Filme filme = filmeService.buscarFilmeComSessoes(id);
         List<SessaoDTO> sessoesDTO = filme.getSessoes().stream()

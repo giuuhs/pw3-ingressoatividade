@@ -1,6 +1,6 @@
-# pw3-ingresso
+# Dupla
 
-# Nickolas e Giulia
+# Eliakim e Gabriel Amador
 
 create table TBL_SESSAO(
     ID_SESSAO BIGINT PRIMARY KEY IDENTITY,
