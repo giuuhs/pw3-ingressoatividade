@@ -56,4 +56,7 @@ public class Filme {
     @Column(name = "CHK_EM_CARTAZ")
     private SimNaoEnum emCartaz;
 
+    @OneToMany(mappedBy) = "filme", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List(Sessao) sessoes = new ArrayList<>();
+
 }
