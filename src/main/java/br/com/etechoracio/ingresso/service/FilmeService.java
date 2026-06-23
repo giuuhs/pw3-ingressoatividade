@@ -35,11 +35,12 @@ public class FilmeService {
 
     public Filme buscarFilmeComSessoes(Long id) {
         Filme filme = filmeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeExcepcion("Filme não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Filme não encontrado"));
         filme.getSessoes().size();
         return filme;
     }
 
     public Filme buscarFilme(Long id) {
+        return filmeRepository.findById(id).orElseThrow();
     }
 }

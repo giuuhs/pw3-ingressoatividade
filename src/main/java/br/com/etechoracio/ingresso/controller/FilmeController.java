@@ -1,6 +1,7 @@
 package br.com.etechoracio.ingresso.controller;
 
 import br.com.etechoracio.ingresso.dto.FilmeResponseDTO;
+import br.com.etechoracio.ingresso.dto.SessaoResponseDTO;
 import br.com.etechoracio.ingresso.entity.Filme;
 import br.com.etechoracio.ingresso.entity.Sessao;
 import br.com.etechoracio.ingresso.service.FilmeService;
@@ -29,16 +30,22 @@ public class FilmeController {
     }
 
     @GetMapping("/{id}/com-sessoes")
-    public ResponseEntity<FilmeComSessaoDTO> getFilmeComSessoes() {
-        return getFilmeComSessoes(null);
-    }
-
-    @GetMapping("/{id}/com-sessoes")
-    public ResponseEntity<FilmeComSessaoDTO> getFilmeComSessoes(@PathVariable Long id) {
+    public Filme getFilmeComSessoes(@PathVariable Long id) {
         Filme filme = filmeService.buscarFilmeComSessoes(id);
         List<SessaoDTO> sessoesDTO = filme.getSessoes().stream()
-                .map(s -> new SessaoDTO(s.getId(), s.getPreco(), s.getHorario(), s.getSala))
+                .map(s -> new SessaoDTO(s.getId(), s.getPreco(), s.getHorario(), s.getSala()))
                 .toList();
+        return filme;
+    }
+
+    @GetMapping("/{id}")
+    public Filme buscarFilme(@PathVariable Long id)
+    {
+        Filme filme = filmeService.buscarFilme(id);
+        List<SessaoResponseDTO> sessoes = filme.getSessoes().stream().map(s -> new SessaoResponseDTO(s.getId(),
+                s.getData().toString(), s.getHorario(), s.getPreco(), s.getSala()
+        )).toList();
+        return filme;
     }
 
     @PostMapping("/{id}/sessoes")

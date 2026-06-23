@@ -32,6 +32,6 @@ public class Sessao{
     private String sala;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "filme_id", nullable = false)
+    @JoinColumn(name = "filme_id", nullable = false)   //algo errado aq, arrumar isso no filme
     private Filme filme;
 }
