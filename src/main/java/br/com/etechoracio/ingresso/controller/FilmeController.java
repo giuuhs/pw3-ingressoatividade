@@ -5,6 +5,7 @@ import br.com.etechoracio.ingresso.dto.SessaoResponseDTO;
 import br.com.etechoracio.ingresso.entity.Filme;
 import br.com.etechoracio.ingresso.entity.Sessao;
 import br.com.etechoracio.ingresso.service.FilmeService;
+import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,20 +39,4 @@ public class FilmeController {
         return filme;
     }
 
-    @GetMapping("/{id}")
-    public Filme buscarFilme(@PathVariable Long id)
-    {
-        Filme filme = filmeService.buscarFilme(id);
-        List<SessaoResponseDTO> sessoes = filme.getSessoes().stream().map(s -> new SessaoResponseDTO(s.getId(),
-                s.getData().toString(), s.getHorario(), s.getPreco(), s.getSala()
-        )).toList();
-        return filme;
-    }
-
-    @PostMapping("/{id}/sessoes")
-    public ResponseEntity<Sessao> criarSessao(@PathVariable Long id, @RequestBody Sessao sessao) {
-        Filme filme = filmeService.buscarFilme(id);
-        sessao.setFilme(filme);
-        return ResponseEntity.ok(sessaoRepository.save(sessao));
-    }
 }

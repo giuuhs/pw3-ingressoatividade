@@ -1,6 +1,6 @@
 # Dupla
 
-# Eliakim e Gabriel Amador
+# Giulia e Nickolas
 
 create table TBL_SESSAO(
     ID_SESSAO BIGINT PRIMARY KEY IDENTITY,
